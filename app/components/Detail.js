@@ -19,7 +19,7 @@ class Detail extends React.Component {
   }
   fetchFeed(type){
     const baseURL = 'https://api.github.com/repos/facebook';
-    ajax.get(`${baseURL}/${this.props.params.repo}/${type}`)
+    ajax.get(`${baseURL}/${this.props.match.params.repo}/${type}`)
     .end((error, response) => {
       if (!error && response) {
         console.dir(response.body);
