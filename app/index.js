@@ -8,13 +8,15 @@ var ReactRouter = require('react-router-dom');
 var Router = ReactRouter.BrowserRouter;
 var Route = ReactRouter.Route;
 var Switch = ReactRouter.Switch;
+var Link = require('react-router-dom').Link;
 
 
 ReactDOM.render(
   <Router>
     <Switch>
+      <Route exact path="/" component={ App } />
       <Route exact path="/" component={ List }/>
-      <Route exact path="/react" component={ Detail }/>
+      <Route path="/react/:repo" component={ Detail }/>
       <Route render={function() {
         return <p>Not Found</p>
       }} />
