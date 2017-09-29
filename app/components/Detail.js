@@ -1,5 +1,7 @@
 var React = require('react')
 var ajax = require('superagent');
+var Link = require('react-router-dom').Link;
+var NavLink = require('react-router-dom').Link;
 
 class Detail extends React.Component {
   constructor(props){
@@ -40,7 +42,7 @@ class Detail extends React.Component {
 
       return (
         <p key={index}>
-          <strong>{author}</strong>
+          <Link to={`/user/${author}`}>{author}</Link>
           <a href={commit.html_url}>{commit.commit.message}</a>.
         </p>
       )
@@ -52,7 +54,7 @@ class Detail extends React.Component {
 
       return (
         <p key={index}>
-          <strong>{owner}</strong>: forked to <a href={fork.html_url}>{fork.html_url}</a> at {fork.created_at}.
+          <Link to={`/user/${owner}`}>{owner}</Link>: forked to <a href={fork.html_url}>{fork.html_url}</a> at {fork.created_at}.
         </p>
       )
     });
@@ -63,8 +65,8 @@ class Detail extends React.Component {
 
       return (
         <p key={index}>
-          <strong>{user}</strong>
-          <a href={pull.html_url}>{pull.body}</a>.
+          <Link to={`/user/${user}`}>{user}</Link>
+          <a href={pull.html_url}> {pull.body}</a>.
         </p>
       )
     });
@@ -83,6 +85,7 @@ class Detail extends React.Component {
     }
     return (
       <div>
+        <p>You are here: <NavLink to="/" activeClassName="active">Home</NavLink> > {this.props.match.params.repo} </p>
         <button onClick={this.selectMode.bind(this, 'commits')}>Show Commits</button>
         <button onClick={this.selectMode.bind(this, 'forks')}>Show Forks</button>
         <button onClick={this.selectMode.bind(this, 'pulls')}>Show Pulls</button>
